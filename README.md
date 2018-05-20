@@ -1,6 +1,7 @@
-# Open vSwitch with DPDK and Vhostuser CNI development sandbox
+# Open vSwitch with DPDK
 
 Virtio-user with vhost-user backend provide high performance user space container networking. 
+
 Please refer to here(http://dpdk.org/doc/guides/howto/virtio_user_for_container_networking.html) for more information.
 
 ## Setup Open vSwitch
@@ -39,11 +40,11 @@ $ git clone https://github.com/intel/vhost-user-net-plugin.git /home/vagrant/go/
 
 ## Docker images 
 
-### [pktgen-3.4.9](https://hub.docker.com/r/johnlin/pktgen-docker/)
+#### [pktgen-3.4.9](https://hub.docker.com/r/johnlin/pktgen-docker/)
 ```shell
 $ docker pull johnlin/pktgen-docker:3.4.9
 ```
-### [dpdk-17.11.2 with app testpmd & l2fwd](https://hub.docker.com/r/johnlin/dpdk-docker/)
+#### [dpdk-17.11.2 with app testpmd & l2fwd](https://hub.docker.com/r/johnlin/dpdk-docker/)
 
 ```shell
 $ docker pull johnlin/dpdk-docker:17.11.2
