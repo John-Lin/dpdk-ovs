@@ -92,6 +92,8 @@ sudo mkdir -p /usr/local/var/run/openvswitch
 sudo mkdir -p /usr/local/var/log/openvswitch
 sudo ovsdb-tool create /usr/local/etc/openvswitch/conf.db vswitchd/vswitch.ovsschema
 
+echo 'export PATH=$PATH:/usr/local/share/openvswitch/scripts' | sudo tee -a /root/.bashrc
+
 #### Cleanup
 rm -rf /home/vagrant/openvswitch-2.9.0.tar.gz /home/vagrant/dpdk-17.11.2.tar.xz /home/vagrant/go1.9.1.linux-amd64.tar.gz /home/vagrant/pktgen-3.4.9.tar.gz
 SCRIPT

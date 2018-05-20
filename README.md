@@ -1,6 +1,6 @@
 # Open vSwitch with DPDK
 
-Virtio-user with vhost-user backend provide high performance user space container networking. 
+Virtio-user with vhost-user backend provide high performance user space container networking.
 
 Please refer to [here](http://dpdk.org/doc/guides/howto/virtio_user_for_container_networking.html) for more information.
 
@@ -9,9 +9,12 @@ Please refer to [here](http://dpdk.org/doc/guides/howto/virtio_user_for_containe
 $ ovsdb-server --remote=punix:/usr/local/var/run/openvswitch/db.sock --remote=db:Open_vSwitch,Open_vSwitch,manager_options --pidfile --detach --log-file
 
 $ ovs-vsctl --no-wait init
-$ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-init=true 
-$ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-socket-mem="1024" 
-$ ovs-vsctl --no-wait set Open_vSwitch . other_config:pmd-cpu-mask=0x2
+$ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-init=true
+$ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-socket-mem="1024"
+
+
+
+$ ovs-vsctl --no-wait set Open_vSwitch . other_config:pmd-cpu-mask=0x4
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:max-idle=30000
 
 $ ovs-vswitchd  unix:/usr/local/var/run/openvswitch/db.sock --pidfile --detach --log-file
@@ -38,7 +41,7 @@ $ ln -s $(pwd)/app/x86_64-native-linuxapp-gcc/pktgen /usr/bin/pktgen
 $ git clone https://github.com/intel/vhost-user-net-plugin.git /home/vagrant/go/src/github.com/intel/vhost-user-net-plugin/
 ```
 
-## Docker images 
+## Docker images
 
 #### [pktgen-3.4.9](https://hub.docker.com/r/johnlin/pktgen-docker/)
 ```shell
