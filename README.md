@@ -12,14 +12,13 @@ $ ovs-vsctl --no-wait init
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-init=true
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-socket-mem="1024"
 
-
-
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:pmd-cpu-mask=0x4
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:max-idle=30000
 
 $ ovs-vswitchd  unix:/usr/local/var/run/openvswitch/db.sock --pidfile --detach --log-file
 
 $ ovs-vsctl add-br br0 -- set bridge br0 datapath_type=netdev
+$ ovs-vsctl add-port br0 dpdk0 -- set Interface dpdk0 type=dpdk options:dpdk-devargs=0000:00:08.0 
 ```
 
 ## Install pktgen

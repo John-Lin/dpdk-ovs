@@ -78,7 +78,7 @@ echo "igb_uio" | sudo tee -a /etc/modules
 # Bind secondary network adapter
 # Note that this NIC setup does not persist across reboots
 sudo ifconfig ${NET_IF_NAME} down
-# sudo ${DPDK_DIR}/usertools/dpdk-devbind.py --bind=igb_uio ${NET_IF_NAME}
+sudo ${DPDK_DIR}/usertools/dpdk-devbind.py --bind=igb_uio ${NET_IF_NAME}
 sudo ${DPDK_DIR}/usertools/dpdk-devbind.py --status
 
 #### Install Open vSwitch
