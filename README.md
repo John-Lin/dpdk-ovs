@@ -12,7 +12,7 @@ $ ovs-vsctl --no-wait init
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-init=true
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-socket-mem="1024"
 
-$ ovs-vsctl --no-wait set Open_vSwitch . other_config:pmd-cpu-mask=0x4
+    $ ovs-vsctl --no-wait set Open_vSwitch . other_config:pmd-cpu-mask=0x2
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:max-idle=30000
 
 $ ovs-vswitchd  unix:/usr/local/var/run/openvswitch/db.sock --pidfile --detach --log-file
