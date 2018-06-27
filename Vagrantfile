@@ -43,8 +43,8 @@ sudo apt-get -qq install -y docker-ce
 wget --quiet https://fast.dpdk.org/rel/dpdk-17.11.2.tar.xz
 sudo tar xf dpdk-17.11.2.tar.xz -C /usr/src/
 
-wget --quiet http://openvswitch.org/releases/openvswitch-2.9.0.tar.gz
-sudo tar -zxf openvswitch-2.9.0.tar.gz -C /usr/src/
+wget --quiet http://openvswitch.org/releases/openvswitch-2.9.2.tar.gz
+sudo tar -zxf openvswitch-2.9.2.tar.gz -C /usr/src/
 
 wget --quiet http://www.dpdk.org/browse/apps/pktgen-dpdk/snapshot/pktgen-3.4.9.tar.gz
 sudo tar -zxf pktgen-3.4.9.tar.gz -C /usr/src/
@@ -82,7 +82,7 @@ sudo ${DPDK_DIR}/usertools/dpdk-devbind.py --bind=igb_uio ${NET_IF_NAME}
 sudo ${DPDK_DIR}/usertools/dpdk-devbind.py --status
 
 #### Install Open vSwitch
-export OVS_DIR=/usr/src/openvswitch-2.9.0
+export OVS_DIR=/usr/src/openvswitch-2.9.2
 cd $OVS_DIR
 ./boot.sh
 CFLAGS='-march=native' ./configure --with-dpdk=$DPDK_BUILD
@@ -95,7 +95,7 @@ sudo ovsdb-tool create /usr/local/etc/openvswitch/conf.db vswitchd/vswitch.ovssc
 echo 'export PATH=$PATH:/usr/local/share/openvswitch/scripts' | sudo tee -a /root/.bashrc
 
 #### Cleanup
-rm -rf /home/vagrant/openvswitch-2.9.0.tar.gz /home/vagrant/dpdk-17.11.2.tar.xz /home/vagrant/go1.9.1.linux-amd64.tar.gz /home/vagrant/pktgen-3.4.9.tar.gz
+rm -rf /home/vagrant/openvswitch-2.9.2.tar.gz /home/vagrant/dpdk-17.11.2.tar.xz /home/vagrant/go1.9.1.linux-amd64.tar.gz /home/vagrant/pktgen-3.4.9.tar.gz
 SCRIPT
 
 Vagrant.configure("2") do |config|
