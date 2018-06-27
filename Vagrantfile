@@ -16,6 +16,9 @@ echo 'vm.nr_hugepages=1024' | sudo tee /etc/sysctl.d/hugepages.conf
 sudo mount -t hugetlbfs none /dev/hugepages
 sudo sysctl -w vm.nr_hugepages=1024
 
+sudo cp /tmp/ovs-vswitchd.service /etc/systemd/system/ovs-vswitchd.service
+sudo cp /tmp/ovsdb-server.service /etc/systemd/system/ovsdb-server.service
+
 # Name of network interface provisioned for DPDK to bind
 export NET_IF_NAME=enp0s8
 
@@ -94,6 +97,12 @@ sudo ovsdb-tool create /usr/local/etc/openvswitch/conf.db vswitchd/vswitch.ovssc
 
 echo 'export PATH=$PATH:/usr/local/share/openvswitch/scripts' | sudo tee -a /root/.bashrc
 
+sudo systemctl enable ovsdb-server
+sudo systemctl start ovsdb-server
+
+sudo systemctl enable ovs-vswitchd
+sudo systemctl start ovs-vswitchd
+
 #### Cleanup
 rm -rf /home/vagrant/openvswitch-2.9.2.tar.gz /home/vagrant/dpdk-17.11.2.tar.xz /home/vagrant/go1.9.1.linux-amd64.tar.gz /home/vagrant/pktgen-3.4.9.tar.gz
 SCRIPT
@@ -101,6 +110,8 @@ SCRIPT
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.hostname = "devstack"
+  config.vm.provision "file", source: "systemctl/ovs-vswitchd.service", destination: "/tmp/ovs-vswitchd.service"
+  config.vm.provision "file", source: "systemctl/ovsdb-server.service", destination: "/tmp/ovsdb-server.service"
   config.vm.provision "shell", privileged: false, inline: $script
   config.vm.network "private_network", ip: "192.168.200.100"
 
