@@ -6,19 +6,21 @@ Please refer to [here](http://dpdk.org/doc/guides/howto/virtio_user_for_containe
 
 ## Setup Open vSwitch
 ```shell
-$ ovsdb-server --remote=punix:/usr/local/var/run/openvswitch/db.sock --remote=db:Open_vSwitch,Open_vSwitch,manager_options --pidfile --detach --log-file
+sudo systemctl start ovsdb-server
+sudo systemctl start ovs-vswitchd
 
 $ ovs-vsctl --no-wait init
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-init=true
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:dpdk-socket-mem="1024"
-
-    $ ovs-vsctl --no-wait set Open_vSwitch . other_config:pmd-cpu-mask=0x2
+$ ovs-vsctl --no-wait set Open_vSwitch . other_config:pmd-cpu-mask=0x2
 $ ovs-vsctl --no-wait set Open_vSwitch . other_config:max-idle=30000
 
-$ ovs-vswitchd  unix:/usr/local/var/run/openvswitch/db.sock --pidfile --detach --log-file
-
+# userspace datapath with dpdk
 $ ovs-vsctl add-br br0 -- set bridge br0 datapath_type=netdev
 $ ovs-vsctl add-port br0 dpdk0 -- set Interface dpdk0 type=dpdk options:dpdk-devargs=0000:00:08.0 
+
+# kernel datapath
+$ sudo ovs-vsctl add-br br1 -- set bridge br1 datapath_type=system
 ```
 
 ## Install pktgen
