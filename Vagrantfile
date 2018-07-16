@@ -88,7 +88,7 @@ sudo ${DPDK_DIR}/usertools/dpdk-devbind.py --status
 export OVS_DIR=/usr/src/openvswitch-2.9.2
 cd $OVS_DIR
 ./boot.sh
-CFLAGS='-march=native' ./configure --with-dpdk=$DPDK_BUILD
+CFLAGS='-march=native' ./configure --prefix=/usr --localstatedir=/var --sysconfdir=/etc --with-dpdk=$DPDK_BUILD
 make && sudo make install
 sudo mkdir -p /usr/local/etc/openvswitch
 sudo mkdir -p /usr/local/var/run/openvswitch
