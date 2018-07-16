@@ -9,12 +9,12 @@ AssertPathIsReadWrite=/var/run/openvswitch/db.sock
 [Service]
 Type=forking
 Restart=on-failure
-ExecStart=/usr/local/share/openvswitch/scripts/ovs-ctl \
+ExecStart=/usr/share/openvswitch/scripts/ovs-ctl \
           --no-ovsdb-server --no-monitor --system-id=random \
           --ovs-user=${OVS_USER_ID} \
           start $OPTIONS
-ExecStop=/usr/local/share/openvswitch/scripts/ovs-ctl --no-ovsdb-server stop
-ExecReload=/usr/local/share/openvswitch/scripts/ovs-ctl --no-ovsdb-server \
+ExecStop=/usr/share/openvswitch/scripts/ovs-ctl --no-ovsdb-server stop
+ExecReload=/usr/share/openvswitch/scripts/ovs-ctl --no-ovsdb-server \
           --no-monitor --system-id=random \
           --ovs-user=${OVS_USER_ID} \
           restart $OPTIONS

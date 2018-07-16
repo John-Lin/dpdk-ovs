@@ -7,11 +7,11 @@ Wants=ovs-delete-transient-ports.service
 [Service]
 Type=forking
 Restart=on-failure
-ExecStart=/usr/local/share/openvswitch/scripts/ovs-ctl \
+ExecStart=/usr/share/openvswitch/scripts/ovs-ctl \
           --no-ovs-vswitchd --no-monitor --system-id=random \
           --ovs-user=${OVS_USER_ID} \
           start $OPTIONS
-ExecStop=/usr/local/share/openvswitch/scripts/ovs-ctl --no-ovs-vswitchd stop
-ExecReload=/usr/local/share/openvswitch/scripts/ovs-ctl --no-ovs-vswitchd \
+ExecStop=/usr/share/openvswitch/scripts/ovs-ctl --no-ovs-vswitchd stop
+ExecReload=/usr/share/openvswitch/scripts/ovs-ctl --no-ovs-vswitchd \
            --ovs-user=${OVS_USER_ID} \
            --no-monitor restart $OPTIONS
